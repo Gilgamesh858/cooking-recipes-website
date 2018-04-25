@@ -1,0 +1,122 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Last-Minute Food</title>
+
+    <!-- Bootstrap Core CSS DA TOGLIERE IL RANDOOOOOOOOOOOM-->
+    <link href="{% static 'css/bootstrap.min.css' %}?rand=234234117" rel="stylesheet">
+
+    <!-- Custom CSS DA TOGLIERE IL RANDOOOOOOOOOOOM-->
+    <link  type="text/css" href="{% static 'css/business-casual.css' %}?rand=234234117" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <div class="brand">Last-Minute Food</div>
+    <div class="address-bar">Le pietanze dei fuorisede</div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class="navbar-brand" href="/">Last-Minute Food</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/cookbook">Ricette</a>
+                    </li>
+                    <li>
+                        <a href="/search">Cerca</a>
+                    </li>
+                    <li>
+                        <a href="/contact">Contatti</a>
+                    </li>
+                  </li>
+                  <!-- Se un utente e' connesso mi visualizza il nome -->
+                  {% if user.username %}
+                  <li id="username_li">
+                    <a href="{% url 'profile_view' user.username %}">{{ user.username }}</a>
+                  </li>
+                  <li id="logout_li">
+                    <a href="/logout">Logout</a>
+                  </li>
+                    {% if user.is_superuser %}
+                    <li>
+                      <a href="/admin" target="_blank">
+                        <img src="{% static 'images/cog.png' %}" alt="Pannello Amministratore" class="admin-cog-image">
+                      </a>
+                    </li>
+                    {% endif %}
+                  {% else %}
+                  <li id="login_li">
+                    <a href="/login">Login</a>
+                  </li>
+                  {% endif %}
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+    <!-- /.container -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Copyright &copy; Last-Minute Food 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+
+    </script>
+
+</body>
+
+</html>
